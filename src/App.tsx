@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
+import Header from './components/Header';
+import { TeamContextProvider } from './hooks/TeamContext';
 import Pokedex from './pages/Pokedex';
+
 
 /**
  * une page avec une liste de pokemon
@@ -13,7 +16,10 @@ function App() {
 
   return (
     <AppContainer>
-      <Pokedex />
+      <Header />
+      <TeamContextProvider>
+        <Pokedex />
+      </TeamContextProvider>
     </AppContainer>
   );
 }
@@ -27,5 +33,6 @@ const AppContainer = styled.div`
     flex
     flex-col
     items-center
+    bg-gray-200
   `}
 `

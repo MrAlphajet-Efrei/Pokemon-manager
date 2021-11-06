@@ -1,6 +1,6 @@
-import { IPokemonStat, IPokemonType } from "pokeapi-typescript"
+import { IPokemon, IPokemonStat, IPokemonType } from "pokeapi-typescript"
 
-export type team = Array<any>[6] 
+ 
 
 export type card = {
     id:number
@@ -10,4 +10,13 @@ export type card = {
     image:string
 }
 
+export type team = {
+    team:IPokemon[]
+    setTeam:React.Dispatch<React.SetStateAction<IPokemon[]>>
+}
+
+
+export type teamContextProviderProps = {
+    children: React.ReactNode
+}
 

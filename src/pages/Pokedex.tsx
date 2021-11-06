@@ -4,21 +4,22 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 import PokemonCards from '../components/PokemonCards'
 import { MdCatchingPokemon } from "react-icons/md";
-import Header from '../components/Header'
+import pokeball from '../pokeball.png'
+
 
 
 function Pokedex() {
     const [pokemons, setPokemons] = useState<IPokemon[]>([])
-    const [page, setPage] = useState(0)
-
+    const [page, setPage] = useState(0)                                         // servira prochainement à changer de page
+    
     useEffect(() => {
         fetchPokemon()
     }, [])
 
     const fetchPokemon = async () => {
         let pokeArray: IPokemon[] = []
-        let start = page * 40
-        const resourceList = await PokeAPI.Pokemon.list(40, start)
+        
+        const resourceList = await PokeAPI.Pokemon.listAll()
         resourceList.results.map(async (result) => {
             const pokemon: IPokemon = await PokeAPI.Pokemon.fetch(result.name)
             pokeArray.push(pokemon)
@@ -26,23 +27,26 @@ function Pokedex() {
         })
         setPokemons(pokeArray)
     }
-
-    const Afficherconsole = (): void => {
-        console.log(pokemons)
-        setPage(page + 1)
+    
+    /**
+     * Fonction qui permet de passer outre le problème du rendu du composant à changer à l'avenir
+     */
+    const GetNextPage = (): void => {  
+        setPage(page+40)
+        console.log(page)
     }
     return (
         <PokeDexContainer>
-            <Header />
+            
             {pokemons.length === 0
-                ? <ButtonDex onClick={Afficherconsole}>Ouvrir le Pokedex</ButtonDex>
-                : <ButtonDex>Il y a {pokemons.length} Pokemon</ButtonDex>
+                ? <ButtonDex onClick={GetNextPage}>Ouvrir le Pokedex</ButtonDex>
+                : <ButtonDex style={{backgroundImage: pokeball}} onClick={GetNextPage}>Afficher plus de Pokemon</ButtonDex>
             }
 
             {pokemons.length === 0
                 ? <PokeBallLogo />
                 : <DexList>
-                    {pokemons.map(pokemon => {
+                    {pokemons.filter(pokemon => pokemon.id < page).map(pokemon => {
                         return <PokemonCards
                             key={pokemon.id}
                             id={pokemon.id}
@@ -76,7 +80,7 @@ const DexList = styled.div`
     ${tw`
         grid
         grid-cols-5
-        bg-blanc2
+        bg-gradient-to-r from-blanc2 to-color-type-water
         rounded-xl
         items-center
         space-x-3

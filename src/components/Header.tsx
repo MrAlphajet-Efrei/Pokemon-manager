@@ -1,5 +1,6 @@
 import React from 'react'
 import { SiPokemon } from "react-icons/si";
+import { GiPokecog } from "react-icons/gi";
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
@@ -7,6 +8,7 @@ function Header() {
     return (
         <HeaderContainer>
             <PokemonTitle />
+            <TeamIcon />
         </HeaderContainer>
     )
 }
@@ -18,10 +20,10 @@ const HeaderContainer = styled.div`
         top-0
         h-24
         w-full
-        bg-gradient-to-r from-blanc2 to-color-type-fire
+        bg-gradient-to-r from-blanc2 to-color-type-water
         items-center
         flex
-        flex-col
+        place-content-center
     `}
 `
 const PokemonTitle = styled(SiPokemon)`
@@ -31,5 +33,17 @@ const PokemonTitle = styled(SiPokemon)`
         bg-gradient-to-r from-or to-yellow-200
         mt-2
         rounded-full
+        place-self-center
+        mb-2
+        ml-32
+    `}
+`
+const TeamIcon = styled(GiPokecog)`
+    ${tw`
+        place-self-end
+        w-32
+        h-12
+        my-5
+        right-0
     `}
 `
