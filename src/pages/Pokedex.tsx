@@ -1,54 +1,108 @@
+import PokeAPI, { IPokemon } from 'pokeapi-typescript'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import PokeAPI, {IPokemon, IPokemonType} from "pokeapi-typescript";
-import PokemonCards from '../components/PokemonCards';
-import { card } from '../types/pokeType';
+import PokemonCards from '../components/PokemonCards'
+import { MdCatchingPokemon } from "react-icons/md";
+import Header from '../components/Header'
 
 
 function Pokedex() {
+    const [pokemons, setPokemons] = useState<IPokemon[]>([])
     const [page, setPage] = useState(0)
-    let pokeArray : Array<IPokemon> = []
-    const [pokemons, setPokemons] = useState(pokeArray)
 
     useEffect(() => {
-        fetchListPokemon()
-        console.log(pokemons)
-    },[])
+        fetchPokemon()
+    }, [])
 
-    const fetchListPokemon = async () => {
-        const completeResourceList = await PokeAPI.Pokemon.list(9, (page*9))
-        completeResourceList.results.forEach(async (pokemon) => {
-            const result: IPokemon = await PokeAPI.Pokemon.fetch(pokemon.name)
-            pokeArray.push(result)
+    const fetchPokemon = async () => {
+        let pokeArray: IPokemon[] = []
+        let start = page * 40
+        const resourceList = await PokeAPI.Pokemon.list(40, start)
+        resourceList.results.map(async (result) => {
+            const pokemon: IPokemon = await PokeAPI.Pokemon.fetch(result.name)
+            pokeArray.push(pokemon)
+
         })
         setPokemons(pokeArray)
     }
+
+    const Afficherconsole = (): void => {
+        console.log(pokemons)
+        setPage(page + 1)
+    }
     return (
-        <PokedexContainer>
-            {pokemons.map(pokemon => {
-                return <PokemonCards 
-                        key={pokemon.id}
-                        name={pokemon.name}
-                        types={pokemon.types}
-                        stats={pokemon.stats}
-                />
-            })}
-        </PokedexContainer>
+        <PokeDexContainer>
+            <Header />
+            {pokemons.length === 0
+                ? <ButtonDex onClick={Afficherconsole}>Ouvrir le Pokedex</ButtonDex>
+                : <ButtonDex>Il y a {pokemons.length} Pokemon</ButtonDex>
+            }
+
+            {pokemons.length === 0
+                ? <PokeBallLogo />
+                : <DexList>
+                    {pokemons.map(pokemon => {
+                        return <PokemonCards
+                            key={pokemon.id}
+                            id={pokemon.id}
+                            name={pokemon.name}
+                            type={pokemon.types[0].type.name}
+                            stats={pokemon.stats}
+                            image={pokemon.sprites.front_default}
+                        />
+                    })}
+                </DexList>
+            }
+
+
+        </PokeDexContainer>
     )
 }
 
 export default Pokedex
 
-const PokedexContainer = styled.div`
+const PokeDexContainer = styled.div`
     ${tw`
-        bg-white
-        w-[80%]
-        h-[80%]
+        flex
+        flex-col
+        w-full
+        h-full
+        bg-gray-200
         items-center
-        mt-[20%]
+    `}
+`
+const DexList = styled.div`
+    ${tw`
         grid
-        grid-cols-3
-        gap-2
+        grid-cols-5
+        bg-blanc2
+        rounded-xl
+        items-center
+        space-x-3
+        space-y-3
+        p-5
+    `}
+`
+const ButtonDex = styled.button`
+    ${tw`
+        bg-or 
+        rounded-md 
+        h-auto 
+        w-auto 
+        m-16 
+        p-5 
+        text-center 
+        font-bold
+    `}
+`
+const PokeBallLogo = styled(MdCatchingPokemon)`
+    ${tw`
+        h-60
+        w-60
+        bg-blanc2
+        rounded-3xl
+        border-2
+        border-or
     `}
 `
