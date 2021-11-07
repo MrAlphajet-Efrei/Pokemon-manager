@@ -1,27 +1,27 @@
-import React from 'react'
+import React from "react";
 import { SiPokemon } from "react-icons/si";
 import { GiPokecog } from "react-icons/gi";
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import { Link } from "react-router-dom"
+import styled from "styled-components";
+import tw from "twin.macro";
+import { Link } from "react-router-dom";
 
 function Header() {
-    return (
-      <HeaderContainer>
-        <Link to="/">
-          <PokemonTitle />
-        </Link>
-        <Link to="/Team">
-          <TeamIcon />
-        </Link>
-      </HeaderContainer>
-    );
+  return (
+    <HeaderContainer>
+      <Link to="/">
+        <PokemonTitle />
+      </Link>
+      <Link to="/Team">
+        <TeamIcon />
+      </Link>
+    </HeaderContainer>
+  );
 }
 
-export default Header
+export default Header;
 
 const HeaderContainer = styled.div`
-    ${tw`
+  ${tw`
         top-0
         h-24
         w-full
@@ -30,9 +30,9 @@ const HeaderContainer = styled.div`
         flex
         place-content-center
     `}
-`
+`;
 const PokemonTitle = styled(SiPokemon)`
-    ${tw`
+  ${tw`
         w-64
         h-20
         bg-gradient-to-r from-or to-yellow-200
@@ -42,13 +42,13 @@ const PokemonTitle = styled(SiPokemon)`
         mb-2
         ml-32
     `}
-`
+`;
 const TeamIcon = styled(GiPokecog)`
-    ${tw`
+  ${tw`
         place-self-end
         w-32
         h-12
         my-5
         right-0
     `}
-`
+`;

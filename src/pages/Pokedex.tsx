@@ -1,73 +1,93 @@
-import PokeAPI, { IPokemon } from 'pokeapi-typescript'
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import tw from 'twin.macro'
-import PokemonCards from '../components/PokemonCards'
+import PokeAPI, { IPokemon } from "pokeapi-typescript";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import tw from "twin.macro";
+import PokemonCards from "../components/PokemonCards";
 import { MdCatchingPokemon } from "react-icons/md";
-import pokeball from '../pokeball.png'
-
-
+import pokeball from "../pokeball.png";
 
 function Pokedex() {
-    const [pokemons, setPokemons] = useState<IPokemon[]>([])
-    const [page, setPage] = useState(0)                                         // servira prochainement à changer de page
-    
-    useEffect(() => {
-        fetchPokemon()
-    }, [])
+  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+  const [upperIndex, setUpperIndex] = useState(0);
+  const [lowerIndex, setLowerIndex] = useState(0);
 
-    const fetchPokemon = async () => {
-        let pokeArray: IPokemon[] = []
-        
-        const resourceList = await PokeAPI.Pokemon.listAll()
-        resourceList.results.map(async (result) => {
-            const pokemon: IPokemon = await PokeAPI.Pokemon.fetch(result.name)
-            pokeArray.push(pokemon)
+  useEffect(() => {
+    fetchPokemon();
+    console.log(pokemons);
+  }, []);
 
-        })
-        setPokemons(pokeArray)
+  const fetchPokemon = async () => {
+    let pokeArray: IPokemon[] = [];
+
+    const resourceList = await PokeAPI.Pokemon.listAll();
+    resourceList.results.map(async (result) => {
+      const pokemon: IPokemon = await PokeAPI.Pokemon.fetch(result.name);
+      pokeArray.push(pokemon);
+    });
+    setPokemons(pokeArray);
+  };
+
+  const GetNextPage = (): void => {
+    if (lowerIndex < 858 && upperIndex != 0) {
+      setUpperIndex(upperIndex + 40);
+      setLowerIndex(lowerIndex + 40);
+    } else if (upperIndex === 0) {
+      setUpperIndex(upperIndex + 40);
+    } else if (lowerIndex === 858) {
+      alert("You've reached the last page");
     }
-    
-    /**
-     * Fonction qui permet de passer outre le problème du rendu du composant à changer à l'avenir
-     */
-    const GetNextPage = (): void => {  
-        setPage(page+40)
-        console.log(page)
+  };
+
+  const GetPrevioustPage = (): void => {
+    if (lowerIndex === 0) {
+      alert("You are in the first page, can't go back any further");
+    } else {
+      setUpperIndex(upperIndex - 40);
+      setLowerIndex(lowerIndex - 40);
     }
-    return (
-        <PokeDexContainer>
-            
-            {pokemons.length === 0
-                ? <ButtonDex onClick={GetNextPage}>Ouvrir le Pokedex</ButtonDex>
-                : <ButtonDex style={{backgroundImage: pokeball}} onClick={GetNextPage}>Afficher plus de Pokemon</ButtonDex>
-            }
+  };
 
-            {pokemons.length === 0
-                ? <PokeBallLogo />
-                : <DexList>
-                    {pokemons.filter(pokemon => pokemon.id < page).map(pokemon => {
-                        return <PokemonCards
-                            key={pokemon.id}
-                            id={pokemon.id}
-                            name={pokemon.name}
-                            type={pokemon.types[0].type.name}
-                            stats={pokemon.stats}
-                            image={pokemon.sprites.front_default}
-                        />
-                    })}
-                </DexList>
-            }
+  return (
+    <PokeDexContainer>
+      {pokemons.length === 0 ? (
+        <ButtonDex onClick={GetNextPage}>Ouvrir le Pokedex</ButtonDex>
+      ) : (
+        <DivButtonNavDex style={{ backgroundImage: pokeball }}>
+          <ButtonDex onClick={GetPrevioustPage}>Go to previous page</ButtonDex>
+          <ButtonDex onClick={GetNextPage}>Go to next page</ButtonDex>
+        </DivButtonNavDex>
+      )}
 
-
-        </PokeDexContainer>
-    )
+      {pokemons.length === 0 ? (
+        <PokeBallLogo />
+      ) : (
+        <DexList>
+          {pokemons
+            .filter(
+              (pokemon) => pokemon.id < upperIndex && pokemon.id >= lowerIndex
+            )
+            .map((pokemon) => {
+              return (
+                <PokemonCards
+                  key={pokemon.id}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  type={pokemon.types[0].type.name}
+                  stats={pokemon.stats}
+                  image={pokemon.sprites.front_default}
+                />
+              );
+            })}
+        </DexList>
+      )}
+    </PokeDexContainer>
+  );
 }
 
-export default Pokedex
+export default Pokedex;
 
 const PokeDexContainer = styled.div`
-    ${tw`
+  ${tw`
         flex
         flex-col
         w-full
@@ -75,9 +95,9 @@ const PokeDexContainer = styled.div`
         bg-gray-200
         items-center
     `}
-`
+`;
 const DexList = styled.div`
-    ${tw`
+  ${tw`
         grid
         grid-cols-5
         bg-gradient-to-r from-blanc2 to-color-type-water
@@ -87,21 +107,32 @@ const DexList = styled.div`
         space-y-3
         p-5
     `}
-`
+`;
+const DivButtonNavDex = styled.div`
+  ${tw`
+        w-auto
+        h-auto
+        items-center
+        bg-ultra-lune
+        bg-opacity-20
+        rounded-full
+        m-5
+    `}
+`;
 const ButtonDex = styled.button`
-    ${tw`
+  ${tw`
         bg-or 
-        rounded-md 
+        rounded-xl 
         h-auto 
         w-auto 
-        m-16 
+        m-5
         p-5 
         text-center 
         font-bold
     `}
-`
+`;
 const PokeBallLogo = styled(MdCatchingPokemon)`
-    ${tw`
+  ${tw`
         h-60
         w-60
         bg-blanc2
@@ -109,4 +140,4 @@ const PokeBallLogo = styled(MdCatchingPokemon)`
         border-2
         border-or
     `}
-`
+`;

@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import styled from 'styled-components'
-import tw from 'twin.macro'
-import PokemonCardsTeam from '../components/PokemonCardTeam';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import tw from "twin.macro";
+import PokemonCardsTeam from "../components/PokemonCardTeam";
 
-import { TeamContext } from '../hooks/TeamContext'
-
+import { TeamContext } from "../hooks/TeamContext";
 
 function Team() {
   const teamContext = useContext(TeamContext);
@@ -34,10 +33,10 @@ function Team() {
   );
 }
 
-export default Team
+export default Team;
 
 const TeamMainContainer = styled.div`
-    ${tw`
+  ${tw`
         flex
         flex-col
         w-auto
@@ -48,9 +47,9 @@ const TeamMainContainer = styled.div`
         m-32
         p-24
     `}
-`
+`;
 const TeamContainer = styled.div`
-    ${tw`
+  ${tw`
         grid
         grid-cols-6
         bg-gradient-to-r from-blanc2 to-color-type-water
@@ -63,11 +62,11 @@ const TeamContainer = styled.div`
         min-w-[256px]
     `}
 
-    > h1 {
-        ${tw`
+  > h1 {
+    ${tw`
             font-bold
             text-xl
             p-12
         `}
-    }
-`
+  }
+`;
