@@ -5,26 +5,18 @@ import tw from 'twin.macro'
 import { TeamContext } from '../hooks/TeamContext'
 import { card } from '../types/pokeType'
 
-function PokemonCards({ id, name, type, stats, image}:card) {
+function PokemonCardsTeam({ id, name, type, stats, image}:card) {
     const team = useContext(TeamContext)
 
     const style = `bg-color-type-${type} w-auto h-auto content-center rounded-xl flex flex-col`
     const styleType = `bg-color-type-${type} h-auto w-auto font-bold text-base ml-5 mb-2 opacity-50`
 
-    const AddPokemonToTeam = () => {
+    const RemovePokemonFromTeam = () => {
         let pokeArray:IPokemon[] = [...team.team]
-        if (pokeArray.length < 6){
-            const resPokemon = GetPokemonByName()
-            resPokemon.then(res => pokeArray.push(res)).catch(err => console.log(err))
-            team.setTeam(pokeArray)
-        }
-        else{
-            alert("Your team is full")
-        }
-    }
+        const index:number = pokeArray.findIndex(pokemon => pokemon.id === id)
+        pokeArray.splice(index, 1)
 
-    const GetPokemonByName = async () => {
-        return await PokeAPI.Pokemon.fetch(name)
+        team.setTeam(pokeArray)
     }
 
     return (
@@ -32,14 +24,14 @@ function PokemonCards({ id, name, type, stats, image}:card) {
             <h1 className="text-center font-bold">{name} #{id}</h1> 
             <img src={image} width={200} height={200} alt=""/>
             <h2 className={styleType}>{type}</h2>
-            <ButtonAddTeam onClick={AddPokemonToTeam}>ADD</ButtonAddTeam>      
+            <ButtonRemoveFromTeam onClick={RemovePokemonFromTeam}>Remove</ButtonRemoveFromTeam>      
         </div>
     )
 }
 
-export default PokemonCards
+export default PokemonCardsTeam
 
-const ButtonAddTeam = styled.button`
+const ButtonRemoveFromTeam = styled.button`
     ${tw`
         text-center
         text-sm

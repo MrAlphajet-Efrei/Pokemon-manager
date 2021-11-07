@@ -4,6 +4,8 @@ import tw from 'twin.macro';
 import Header from './components/Header';
 import { TeamContextProvider } from './hooks/TeamContext';
 import Pokedex from './pages/Pokedex';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Team from './pages/Team';
 
 
 /**
@@ -15,12 +17,17 @@ import Pokedex from './pages/Pokedex';
 function App() {
 
   return (
-    <AppContainer>
-      <Header />
-      <TeamContextProvider>
-        <Pokedex />
-      </TeamContextProvider>
-    </AppContainer>
+    <Router>
+      <AppContainer>
+        <Header />
+        <TeamContextProvider>
+          <Routes>
+            <Route path="/" element={<Pokedex />} />
+            <Route path="/Team" element={<Team />} />
+          </Routes>
+        </TeamContextProvider>
+      </AppContainer>
+    </Router>
   );
 }
 

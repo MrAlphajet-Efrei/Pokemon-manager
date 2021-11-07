@@ -3,14 +3,19 @@ import { SiPokemon } from "react-icons/si";
 import { GiPokecog } from "react-icons/gi";
 import styled from 'styled-components';
 import tw from 'twin.macro';
+import { Link } from "react-router-dom"
 
 function Header() {
     return (
-        <HeaderContainer>
-            <PokemonTitle />
-            <TeamIcon />
-        </HeaderContainer>
-    )
+      <HeaderContainer>
+        <Link to="/">
+          <PokemonTitle />
+        </Link>
+        <Link to="/Team">
+          <TeamIcon />
+        </Link>
+      </HeaderContainer>
+    );
 }
 
 export default Header
