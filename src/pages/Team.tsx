@@ -60,6 +60,8 @@ const TeamContainer = styled.div`
         h-auto
         min-h-[64px]
         min-w-[256px]
+        p-10
+        space-x-4
     `}
 
   > h1 {
