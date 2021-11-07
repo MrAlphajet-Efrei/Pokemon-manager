@@ -4,7 +4,6 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import PokemonCards from "../components/PokemonCards";
 import { MdCatchingPokemon } from "react-icons/md";
-import pokeball from "../pokeball.png";
 
 function Pokedex() {
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
@@ -13,7 +12,6 @@ function Pokedex() {
 
   useEffect(() => {
     fetchPokemon();
-    console.log(pokemons);
   }, []);
 
   const fetchPokemon = async () => {
@@ -28,7 +26,7 @@ function Pokedex() {
   };
 
   const GetNextPage = (): void => {
-    if (lowerIndex < 858 && upperIndex != 0) {
+    if (lowerIndex < 858 && upperIndex !== 0) {
       setUpperIndex(upperIndex + 40);
       setLowerIndex(lowerIndex + 40);
     } else if (upperIndex === 0) {
@@ -52,7 +50,7 @@ function Pokedex() {
       {pokemons.length === 0 ? (
         <ButtonDex onClick={GetNextPage}>Ouvrir le Pokedex</ButtonDex>
       ) : (
-        <DivButtonNavDex style={{ backgroundImage: pokeball }}>
+        <DivButtonNavDex>
           <ButtonDex onClick={GetPrevioustPage}>Go to previous page</ButtonDex>
           <ButtonDex onClick={GetNextPage}>Go to next page</ButtonDex>
         </DivButtonNavDex>

@@ -51,4 +51,5 @@ const TeamIcon = styled(GiPokecog)`
         my-5
         right-0
     `}
+    color: #FFD700;
 `;

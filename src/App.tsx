@@ -5,7 +5,7 @@ import Header from './components/Header';
 import { TeamContextProvider } from './hooks/TeamContext';
 import Pokedex from './pages/Pokedex';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Team from './pages/Team';
+import NewTeam from './pages/NewTeam';
 
 
 /**
@@ -23,7 +23,7 @@ function App() {
         <TeamContextProvider>
           <Routes>
             <Route path="/" element={<Pokedex />} />
-            <Route path="/Team" element={<Team />} />
+            <Route path="/Team" element={<NewTeam />} />
           </Routes>
         </TeamContextProvider>
       </AppContainer>
