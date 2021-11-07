@@ -1,6 +1,7 @@
 import React from "react";
 import { SiPokemon } from "react-icons/si";
 import { GiPokecog } from "react-icons/gi";
+import { CgPokemon } from "react-icons/cg";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { Link } from "react-router-dom";
@@ -8,6 +9,9 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <HeaderContainer>
+      <Link to="/Box">
+        <BoxIcon />
+      </Link>
       <Link to="/">
         <PokemonTitle />
       </Link>
@@ -40,7 +44,6 @@ const PokemonTitle = styled(SiPokemon)`
         rounded-full
         place-self-center
         mb-2
-        ml-32
     `}
 `;
 const TeamIcon = styled(GiPokecog)`
@@ -52,4 +55,13 @@ const TeamIcon = styled(GiPokecog)`
         right-0
     `}
     color: #FFD700;
+`;
+const BoxIcon = styled(CgPokemon)`
+  ${tw`
+    place-self-end
+    w-32
+    h-12
+    mb-2
+  `}
+  color: #FFD700;
 `;

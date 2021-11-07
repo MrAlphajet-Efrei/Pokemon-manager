@@ -6,6 +6,7 @@ import { TeamContextProvider } from './hooks/TeamContext';
 import Pokedex from './pages/Pokedex';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NewTeam from './pages/NewTeam';
+import TrainerTeamBox from './pages/TrainerTeamBox';
 
 
 /**
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Pokedex />} />
             <Route path="/Team" element={<NewTeam />} />
+            <Route path="/Box" element={<TrainerTeamBox />} />
           </Routes>
         </TeamContextProvider>
       </AppContainer>

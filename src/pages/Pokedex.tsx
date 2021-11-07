@@ -64,6 +64,7 @@ function Pokedex() {
             .filter(
               (pokemon) => pokemon.id < upperIndex && pokemon.id >= lowerIndex
             )
+            .sort(pokemon => pokemon.id)
             .map((pokemon) => {
               return (
                 <PokemonCards
@@ -83,7 +84,7 @@ function Pokedex() {
 }
 
 export default Pokedex;
-
+/**absolute for the button and relative for the parent */
 const PokeDexContainer = styled.div`
   ${tw`
         flex
@@ -92,6 +93,7 @@ const PokeDexContainer = styled.div`
         h-full
         bg-gray-200
         items-center
+        relative
     `}
 `;
 const DexList = styled.div`
@@ -104,6 +106,7 @@ const DexList = styled.div`
         space-x-3
         space-y-3
         p-5
+        mt-40
     `}
 `;
 const DivButtonNavDex = styled.div`
@@ -112,9 +115,9 @@ const DivButtonNavDex = styled.div`
         h-auto
         items-center
         bg-ultra-lune
-        bg-opacity-20
         rounded-full
         m-5
+        fixed
     `}
 `;
 const ButtonDex = styled.button`

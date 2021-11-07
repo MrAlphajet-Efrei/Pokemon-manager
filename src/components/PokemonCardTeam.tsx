@@ -9,7 +9,7 @@ function PokemonCardsTeam({ id, name, type, stats, image }: card) {
   const team = useContext(TeamContext);
 
   const style = `bg-color-type-${type} w-auto h-auto content-center rounded-xl flex flex-col`;
-  const styleType = `bg-color-type-${type} h-auto w-auto font-bold text-base ml-5 mb-2 opacity-50`;
+  const styleType = `bg-color-type-${type} h-auto w-auto font-bold text-base ml-5 mb-2`;
 
   const RemovePokemonFromTeam = () => {
     let pokeArray: IPokemon[] = [...team.team];

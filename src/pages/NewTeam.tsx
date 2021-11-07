@@ -6,7 +6,7 @@ import { TeamContext } from "../hooks/TeamContext";
 import { MdOutlineCatchingPokemon } from "react-icons/md";
 import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebase";
-import { FireBasePokemon, FirebaseTeamFormat } from "../types/pokeType";
+import { FirebaseTeamFormat } from "../types/pokeType";
 
 function NewTeam() {
   const teamContext = useContext(TeamContext);
@@ -19,7 +19,7 @@ function NewTeam() {
     const collectionRef = collection(db, "FightTeams");
     const payload = { team: team };
     const docRef = await addDoc(collectionRef, payload);
-    console.log(docRef); 
+    console.log(docRef);
   };
   return (
     <TeamMainContainer>
@@ -60,7 +60,7 @@ const TeamMainContainer = styled.div`
         flex
         flex-col
         w-auto
-        h-auto
+        h-full
         bg-gray-200
         items-center
         place-self-center
