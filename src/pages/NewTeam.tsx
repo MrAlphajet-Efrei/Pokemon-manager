@@ -19,7 +19,8 @@ function NewTeam() {
     const collectionRef = collection(db, "FightTeams");
     const payload = { team: team };
     const docRef = await addDoc(collectionRef, payload);
-    console.log(docRef);
+    alert("Team Saved")
+    teamContext.setTeam([])
   };
   return (
     <TeamMainContainer>
