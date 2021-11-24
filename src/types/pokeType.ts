@@ -17,9 +17,14 @@ export type teamContextProviderProps = {
   children: React.ReactNode;
 };
 
-export type FirebaseTeamFormat = FireBasePokemon[]
+export type FirebaseTeamFormat = FireBasePokemon[];
 
 export type FireBasePokemon = {
   id: number;
   name: string;
 };
+
+export interface PropsColor {
+  color: string;
+}
+

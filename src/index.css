@@ -1,11 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
-boddy,
+body,
 #root  {
     min-width: 100%;
-    --tw-bg-opacity: 1;
-    background-color: rgba(229, 231, 235, var(--tw-bg-opacity))
+    min-height: 100vh;
+    display: flex;
+    place-content: center;
+    line-height: 1.6;
+    background: DarkSlateGrey;
+    justify-content: center;
+    align-items: center;
+}
+
+:root {
+    --argent: #D0D0D0;
+    --argent-v2: #f7f5f5f1;
+    --or: #FFD700;
+    --or-v2: #ffd90096;
+    --blanc-2: #E9383F;
+    --ultra-lune: #3D32D8;
+    --ultra-lune-v2: #2c21c093;
+    --color-type-normal: #ADA594;
+    --color-type-fighting: #a55239;
+    --color-type-flying: #9cadf7;
+    --color-type-poison: #b55aa5;
+    --color-type-ground: #d6b55a;
+    --color-type-rock: #bda55a;
+    --color-type-bug: #adbd21;
+    --color-type-ghost: #6363b5;
+    --color-type-steel: #adadc6;
+    --color-type-grass: #7bce52;
+    --color-type-fire: #f75231;
+    --color-type-water: #399cff;
+    --color-type-electric: #ffc631;
+    --color-type-psychic: #ff73a5;
+    --color-type-ice: #5acee7;
+    --color-type-dragon: #8858f6;
+    --color-type-dark: #735a4a;
+    --color-type-fairy: #e09ae3;
 }

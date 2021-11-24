@@ -1,67 +1,58 @@
-import React from "react";
+import React from 'react'
+import styled from 'styled-components'
 import { SiPokemon } from "react-icons/si";
 import { GiPokecog } from "react-icons/gi";
-import { CgPokemon } from "react-icons/cg";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Header() {
-  return (
-    <HeaderContainer>
-      <Link to="/Box">
-        <BoxIcon />
-      </Link>
-      <Link to="/">
-        <PokemonTitle />
-      </Link>
-      <Link to="/Team">
-        <TeamIcon />
-      </Link>
-    </HeaderContainer>
-  );
+    return (
+        <HeaderMainContainer>
+            <Link to="/NewTeam">
+                <TeamIcon />
+            </Link>
+            <Link to="/">
+                <PokemonLogo />
+            </Link>
+        </HeaderMainContainer>
+    )
 }
 
-export default Header;
+export default Header
 
-const HeaderContainer = styled.div`
-  ${tw`
-        top-0
-        h-24
-        w-full
-        bg-gradient-to-r from-blanc2 to-color-type-water
-        items-center
-        flex
-        place-content-center
-    `}
-`;
-const PokemonTitle = styled(SiPokemon)`
-  ${tw`
-        w-64
-        h-20
-        bg-gradient-to-r from-or to-yellow-200
-        mt-2
-        rounded-full
-        place-self-center
-        mb-2
-    `}
-`;
+const PokemonLogo = styled(SiPokemon)`
+    width: 2em;
+    height: auto;
+    color: var(--or);
+    transition: transform 500ms ease;
+    margin-left: 1em;
+    margin-right: 1em;
+
+    :hover {
+        transform: scale(1.15);
+    }
+`
 const TeamIcon = styled(GiPokecog)`
-  ${tw`
-        place-self-end
-        w-32
-        h-12
-        my-5
-        right-0
-    `}
-    color: #FFD700;
-`;
-const BoxIcon = styled(CgPokemon)`
-  ${tw`
-    place-self-end
-    w-32
-    h-12
-    mb-2
-  `}
-  color: #FFD700;
-`;
+    width: 0.75em;
+    height: auto;
+    color: var(--or);
+    transition: transform 500ms ease;
+    margin-left: 1em;
+
+    :hover {
+        transform: scale(1.25);
+    }
+`
+const HeaderMainContainer = styled.header`
+    width: 100%;
+    min-height: 8vh;
+    font-size: 1.25em;
+    background: linear-gradient(var(--ultra-lune), var(--ultra-lune-v2));
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    place-items: center;
+    margin: 0;
+    top: 0;
+    position: fixed;
+    z-index: 4;
+`

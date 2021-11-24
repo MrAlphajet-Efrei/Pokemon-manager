@@ -1,47 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import Header from './components/Header';
-import { TeamContextProvider } from './hooks/TeamContext';
-import Pokedex from './pages/Pokedex';
+import React from "react";
+import styled from "styled-components";
+import Header from "./components/Header";
+import CardList from "./pages/CardList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NewTeam from './pages/NewTeam';
-import TrainerTeamBox from './pages/TrainerTeamBox';
+import { TeamContextProvider } from "./hooks/TeamContext";
+import NewTeam from "./pages/NewTeam";
 
-
-/**
- * une page avec une liste de pokemon
- * une page d'infos pour chaque pokemon
- * une page team 
- * on doit juste gérer la team a travers toutes les pages
- */
 function App() {
-
   return (
     <Router>
-      <AppContainer>
+      <MainContainer>
         <Header />
         <TeamContextProvider>
           <Routes>
-            <Route path="/" element={<Pokedex />} />
-            <Route path="/Team" element={<NewTeam />} />
-            <Route path="/Box" element={<TrainerTeamBox />} />
+            <Route path="/" element={<CardList />} />
+            <Route path="/NewTeam" element={<NewTeam />} />
           </Routes>
         </TeamContextProvider>
-      </AppContainer>
+      </MainContainer>
     </Router>
   );
 }
 
 export default App;
 
-const AppContainer = styled.div`
-  ${tw`
-    h-full
-    w-full
-    flex
-    flex-col
-    items-center
-    bg-gray-200
-  `}
-`
+const MainContainer = styled.div`
+  width: 100%;
+  font-size: 2rem;
+`;
