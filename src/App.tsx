@@ -5,6 +5,7 @@ import CardList from "./pages/CardList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { TeamContextProvider } from "./hooks/TeamContext";
 import NewTeam from "./pages/NewTeam";
+import InfosPokemon from "./pages/InfosPokemon";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<CardList />} />
             <Route path="/NewTeam" element={<NewTeam />} />
+            <Route path="/infosPokemon/:id" element={<InfosPokemon />}/>
           </Routes>
         </TeamContextProvider>
       </MainContainer>

@@ -5,14 +5,14 @@ import Card from "../components/Card";
 import { MdCatchingPokemon } from "react-icons/md";
 /* setPokedex((prev) => prev.map(el => el=res)) */
 function CardList() {
-  const [pokedex, setPokedex] = useState<IPokemon[]>([]);
-  const [rangeUpper, setRangeUpper] = useState(20);
-  const [rangeLower, setRangeLower] = useState(1);
+  const [pokedex, setPokedex] = useState<IPokemon[] | null>(null);
+  const [rangeUpper, setRangeUpper] = useState(21);
+  const [rangeLower, setRangeLower] = useState(0);
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
   const FetchPokemon = () => {
     let arr: IPokemon[] = [];
-    for (let i = 1; i <= 859; i++) {
+    for (let i = 0; i <= 859; i++) {
       PokeAPI.Pokemon.resolve(i).then((res) => arr.push(res));
     }
     setPokedex(arr);
@@ -52,7 +52,7 @@ function CardList() {
       />
       <DexUpperSide></DexUpperSide>
       <DexIcon />
-      {isClosed === true ? (
+      {isClosed === true && pokedex ? (
         <>
           <NavDexDiv>
             <button onClick={GoPreviousPage}>Go to previous page</button>

@@ -1,5 +1,6 @@
 import PokeAPI, { IPokemon } from "pokeapi-typescript";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { TeamContext } from "../hooks/TeamContext";
 import { card, PropsColor } from "../types/pokeType";
@@ -30,7 +31,7 @@ function Card({ id, name, type, stats, image }: card) {
         <h1>{name}</h1>
         <p>Pokemon de type {type} sah il est style</p>
         <ButtonSection>
-          <button>More Infos</button>
+          <button><LinkedText to={`/InfosPokemon/${id}`}>More Infos</LinkedText></button>
           <button onClick={AddPokemonToTeams}>Add to team</button>
         </ButtonSection>
       </div>
@@ -39,6 +40,10 @@ function Card({ id, name, type, stats, image }: card) {
 }
 
 export default Card;
+const LinkedText = styled(Link)`
+  border: transparent;
+  color: white;
+`
 const ButtonSection = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
